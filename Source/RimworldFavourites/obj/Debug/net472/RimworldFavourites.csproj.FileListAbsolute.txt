@@ -1,0 +1,5 @@
+C:\Users\danie\Documents\GitHub\RimworldFavourites\Source\RimworldFavourites\obj\Debug\net472\RimworldFavourites.csproj.AssemblyReference.cache
+C:\Users\danie\Documents\GitHub\RimworldFavourites\Source\RimworldFavourites\obj\Debug\net472\RimworldFavourites.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danie\Documents\GitHub\RimworldFavourites\Source\RimworldFavourites\obj\Debug\net472\RimworldFavourites.AssemblyInfoInputs.cache
+C:\Users\danie\Documents\GitHub\RimworldFavourites\Source\RimworldFavourites\obj\Debug\net472\RimworldFavourites.AssemblyInfo.cs
+C:\Users\danie\Documents\GitHub\RimworldFavourites\Source\RimworldFavourites\obj\Debug\net472\RimworldFavourites.csproj.CoreCompileInputs.cache
