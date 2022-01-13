@@ -65,31 +65,29 @@ namespace RimworldFavourites
 
         }
 
-        [HarmonyPatch(typeof(Reward_Items))]
-        [HarmonyPatch(nameof(Reward_Items.InitFromValue))]
-        public static class Patch_Reward_Items_InitFromValue
+        [HarmonyPatch(typeof(QuestPart_DropPods))]
+        [HarmonyPatch(nameof(QuestPart_DropPods.Notify_QuestSignalReceived))]
+        public static class Patch_QuestPart_DropPods_Notify_QuestSignalReceived
         {
 
-            public static void Postfix(Reward_Items __instance)
+            public static void Postfix(QuestPart_DropPods __instance, List<Thing> ___tmpThingsToDrop)
             {
-                // Auto favourite quest rewards if not a raw or manufactured resource
-                var items = __instance.ItemsListForReading;
-                if (!items.NullOrEmpty())
+                // Auto favourite quest reward items that are not a raw or manufactured resource
+                if (!___tmpThingsToDrop.NullOrEmpty())
                 {
-                    for (int i = 0; i < items.Count; i++)
+                    for (int i = 0; i < ___tmpThingsToDrop.Count; i++)
                     {
-                        var item = items[i];
-                        if (!item.HasThingCategory(ThingCategoryDefOf.ResourcesRaw) && !item.HasThingCategory(ThingCategoryDefOf.Manufactured))
+                        var curThing = ___tmpThingsToDrop[i];
+                        if (curThing.TryGetComp<CompFavouritable>() is CompFavouritable favouriteComp && !curThing.HasThingCategory(ThingCategoryDefOf.ResourcesRaw) &&
+                            !curThing.HasThingCategory(ThingCategoryDefOf.Manufactured))
                         {
-                            var favouriteComp = item.TryGetComp<CompFavouritable>();
-                            if (favouriteComp != null)
-                                favouriteComp.Favourited = true;
+                            favouriteComp.Favourited = true;
                         }
                     }
                 }
             }
-
         }
 
     }
+
 }
