@@ -46,18 +46,18 @@ namespace RimworldFavourites
 
         }
 
-        [HarmonyPatch(typeof(GenRecipe))]
-        [HarmonyPatch("PostProcessProduct")]
-        public static class Patch_GenRecipe_PostProcessProduct
+        [HarmonyPatch(typeof(QualityUtility))]
+        [HarmonyPatch(nameof(QualityUtility.SendCraftNotification))]
+        public static class Patch_QualityUtility_SendCraftNotification
         {
 
-            public static void Postfix(ref Thing __result)
+            public static void Postfix(ref Thing thing)
             {
                 // Auto favourite produced items that are Masterwork or higher quality
-                var qualityComp = __result.TryGetComp<CompQuality>();
+                var qualityComp = thing.TryGetComp<CompQuality>();
                 if (qualityComp != null && qualityComp.Quality >= QualityCategory.Masterwork)
                 {
-                    var favouriteComp = __result.TryGetComp<CompFavouritable>();
+                    var favouriteComp = thing.TryGetComp<CompFavouritable>();
                     if (favouriteComp != null)
                         favouriteComp.Favourited = true;
                 }
