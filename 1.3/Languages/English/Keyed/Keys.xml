@@ -2,7 +2,10 @@
 <LanguageData>
 
 	<RimworldFavourites.Favourite>Favourite</RimworldFavourites.Favourite> 
+	<RimworldFavourites.FavouriteDesc>Mark this item as a favourite. It will be highlighted in trade menus, on the map view and in inventories.</RimworldFavourites.FavouriteDesc> 
 	<RimworldFavourites.FavouritedIconDesc>This item has been marked as a favourite.</RimworldFavourites.FavouritedIconDesc> 
 	<RimworldFavourites.FavouritedShortUpper>FAV</RimworldFavourites.FavouritedShortUpper> 
+	
+	<RimworldFavourites.ShowFavouritesOverlayButton>Toggle favourited items overlay.</RimworldFavourites.ShowFavouritesOverlayButton> 
 
 </LanguageData>

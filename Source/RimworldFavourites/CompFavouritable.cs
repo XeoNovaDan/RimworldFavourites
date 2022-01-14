@@ -10,14 +10,13 @@ namespace RimworldFavourites
     public class CompFavouritable : ThingComp
     {
 
-        private MinifiedThing MinifiedParent => parent as MinifiedThing;
-
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             // Favourite button
             yield return new Command_Toggle
             {
                 defaultLabel = "RimworldFavourites.Favourite".Translate(),
+                defaultDesc = "RimworldFavourites.FavouriteDesc".Translate(),
                 icon = Favourited ? TexCommand.Favourited : TexCommand.Unfavourited,
                 isActive = () => Favourited,
                 toggleAction = () =>
@@ -40,6 +39,36 @@ namespace RimworldFavourites
                 return "RimworldFavourites.FavouritedShortUpper".Translate() + " - " + label.CapitalizeFirst();
             return label;
         }
+
+
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            // Try and register the item as a favourite to render when spawned
+            base.PostSpawnSetup(respawningAfterLoad);
+            cachedFavouriteOverlayDrawer = parent.Map.GetComponent<FavouriteOverlayDrawer>();
+            UpdateOverlayHandle();
+        }
+
+        public override void PostDeSpawn(Map map)
+        {
+            // Force deregister an item when despawned e.g. furniture minified, to prevent weird duplicate star overlays being rendered
+            base.PostDeSpawn(map);
+            cachedFavouriteOverlayDrawer.Deregister(parent, false);
+        }
+
+        private void UpdateOverlayHandle()
+        {
+            if (!parent.Spawned)
+                return;
+
+            // Register/unregister the item to draw a favourite star over
+            cachedFavouriteOverlayDrawer.Deregister(parent);
+            
+            if (parent.Spawned && Favourited)
+                cachedFavouriteOverlayDrawer.Register(parent);
+        }
+
+        private MinifiedThing MinifiedParent => parent as MinifiedThing;
 
         public bool Favourited
         {
@@ -69,10 +98,13 @@ namespace RimworldFavourites
 
                 else
                     favourited = value;
+
+                UpdateOverlayHandle();
             }
         }
 
         private bool favourited;
+        private FavouriteOverlayDrawer cachedFavouriteOverlayDrawer;
 
     }
 

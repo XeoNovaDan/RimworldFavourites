@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 using HarmonyLib;
 
 namespace RimworldFavourites
@@ -85,6 +86,63 @@ namespace RimworldFavourites
                         }
                     }
                 }
+            }
+        }
+
+        [HarmonyPatch(typeof(RimWorld.PlaySettings))]
+        [HarmonyPatch(nameof(RimWorld.PlaySettings.ExposeData))]
+        public static class Patch_PlaySettings_ExposeData
+        {
+
+            public static void Postfix()
+            {
+                Scribe_Values.Look(ref PlaySettings.showFavouritesOverlay, "showFavouritesOverlay", true);
+            }
+        }
+
+        [HarmonyPatch(typeof(RimWorld.PlaySettings))]
+        [HarmonyPatch(nameof(RimWorld.PlaySettings.DoPlaySettingsGlobalControls))]
+        public static class Patch_PlaySettings_DoPlaySettingsGlobalControls
+        {
+
+            public static void Postfix(ref WidgetRow row, bool worldView)
+            {
+                // Add option in bottom right to toggle favourites overlay
+                if (!worldView)
+                {
+                    row.ToggleableIcon(ref PlaySettings.showFavouritesOverlay, TexCommand.ShowFavouritesOverlay, "RimworldFavourites.ShowFavouritesOverlayButton".Translate());
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(Pawn))]
+        [HarmonyPatch(nameof(Pawn.GetGizmos))]
+        public static class Patch_Pawn_GetGizmos
+        {
+
+            public static void Postfix(Pawn __instance, ref IEnumerable<Gizmo> __result)
+            {
+                var lord = __instance.GetLord();
+                LordJob_Ritual ritual;
+
+                // Show favourite button on non player pawns and animals too, or pawns doing rituals where drafting is blocked
+                if (!__instance.IsColonistPlayerControlled || (lord != null && (ritual = lord.LordJob as LordJob_Ritual) != null) && ritual.BlocksDrafting)
+                {
+                    var resultList = __result.ToList();
+
+                    var favComp = __instance.TryGetComp<CompFavouritable>();
+                    if (favComp != null)
+                    {
+                        var compGizmos = favComp.CompGetGizmosExtra();
+                        foreach (var gizmo in compGizmos)
+                        {
+                            resultList.Add(gizmo);
+                        }
+                    }
+
+                    __result = resultList;
+                }
+                
             }
         }
 
