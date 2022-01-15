@@ -32,6 +32,36 @@
 			</li>
 		</operations>
 	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter/categories</xpath>
+				<success>Invert</success>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter</xpath>
+				<value>
+					<categories/>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter/categories/li[text()="Weapons"]</xpath>
+				<success>Invert</success>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter/categories</xpath>
+				<value>
+					<li>Weapons</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
 
 	<Operation Class="PatchOperationSequence">
 		<success>Always</success>
@@ -59,6 +89,36 @@
 				<xpath>/Defs/RecipeDef[defName="SmeltApparel"]/defaultIngredientFilter</xpath>
 				<value>
 					<specialFiltersToDisallow/>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/RecipeDef[defName="SmeltApparel"]/defaultIngredientFilter/categories</xpath>
+				<success>Invert</success>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/RecipeDef[defName="SmeltApparel"]/defaultIngredientFilter</xpath>
+				<value>
+					<categories/>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/RecipeDef[defName="SmeltApparel"]/defaultIngredientFilter/categories/li[text()="Apparel"]</xpath>
+				<success>Invert</success>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/RecipeDef[defName="SmeltApparel"]/defaultIngredientFilter/categories</xpath>
+				<value>
+					<li>Apparel</li>
 				</value>
 			</li>
 		</operations>
@@ -94,6 +154,36 @@
 			</li>
 		</operations>
 	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/RecipeDef[defName="DestroyWeapon"]/defaultIngredientFilter/categories</xpath>
+				<success>Invert</success>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/RecipeDef[defName="DestroyWeapon"]/defaultIngredientFilter</xpath>
+				<value>
+					<categories/>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/RecipeDef[defName="DestroyWeapon"]/defaultIngredientFilter/categories/li[text()="Weapons"]</xpath>
+				<success>Invert</success>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/RecipeDef[defName="DestroyWeapon"]/defaultIngredientFilter/categories</xpath>
+				<value>
+					<li>Weapons</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
 	
 	<Operation Class="PatchOperationSequence">
 		<success>Always</success>
@@ -121,6 +211,36 @@
 				<xpath>/Defs/RecipeDef[defName="DestroyApparel"]/defaultIngredientFilter</xpath>
 				<value>
 					<specialFiltersToDisallow/>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/RecipeDef[defName="DestroyApparel"]/defaultIngredientFilter/categories</xpath>
+				<success>Invert</success>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/RecipeDef[defName="DestroyApparel"]/defaultIngredientFilter</xpath>
+				<value>
+					<categories/>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/RecipeDef[defName="DestroyApparel"]/defaultIngredientFilter/categories/li[text()="Apparel"]</xpath>
+				<success>Invert</success>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/RecipeDef[defName="DestroyApparel"]/defaultIngredientFilter/categories</xpath>
+				<value>
+					<li>Apparel</li>
 				</value>
 			</li>
 		</operations>

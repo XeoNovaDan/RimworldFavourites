@@ -6,7 +6,7 @@
 	<supportedVersions>
 		<li>1.3</li>
 	</supportedVersions>
-	<description>Favourite your items - no more accidental selling!</description>
+	<description>Favourite your items - no more accidental selling or smelting!</description>
 	<modDependencies>
 		<li>
 			<packageId>brrainz.harmony</packageId>
