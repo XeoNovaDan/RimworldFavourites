@@ -7,5 +7,28 @@
 	<RimworldFavourites.FavouritedShortUpper>FAV</RimworldFavourites.FavouritedShortUpper> 
 	
 	<RimworldFavourites.ShowFavouritesOverlayButton>Toggle favourited items overlay.</RimworldFavourites.ShowFavouritesOverlayButton> 
+	
+	<!-- Mod settings -->
+	<RimworldFavourites.SettingsCategoryTitle>Favourites!</RimworldFavourites.SettingsCategoryTitle>
+	
+	<RimworldFavourites.Settings_AutoFavourite>Auto favouriting</RimworldFavourites.Settings_AutoFavourite>
+	<RimworldFavourites.Settings_AutoFavourite_ToolTip>Master toggle for auto favouriting.</RimworldFavourites.Settings_AutoFavourite_ToolTip>
+	
+	<RimworldFavourites.Settings_AutoFavouriteManufacturedThings>Manufactured things</RimworldFavourites.Settings_AutoFavouriteManufacturedThings>
+	<RimworldFavourites.Settings_AutoFavouriteManufacturedThings_ToolTip>Auto favourite things and buildings that are made by your colonists.</RimworldFavourites.Settings_AutoFavouriteManufacturedThings_ToolTip>
+
+	<RimworldFavourites.Settings_AutoFavouriteQuestRewards>Quest rewards</RimworldFavourites.Settings_AutoFavouriteQuestRewards>
+	<RimworldFavourites.Settings_AutoFavouriteQuestRewards_ToolTip>Auto favourite quest rewards.</RimworldFavourites.Settings_AutoFavouriteQuestRewards_ToolTip>
+	
+	<RimworldFavourites.Settings_AutoFavouriteQuestRewardRawMaterials>Include raw materials</RimworldFavourites.Settings_AutoFavouriteQuestRewardRawMaterials>
+	<RimworldFavourites.Settings_AutoFavouriteQuestRewardRawMaterials_ToolTip>Auto favourite raw materials from quest rewards.</RimworldFavourites.Settings_AutoFavouriteQuestRewardRawMaterials_ToolTip>
+
+	<RimworldFavourites.Settings_AutoFavouriteQuestRewardPawns>Include people and animals</RimworldFavourites.Settings_AutoFavouriteQuestRewardPawns>
+	<RimworldFavourites.Settings_AutoFavouriteQuestRewardPawns_ToolTip>Auto favourite people and animals that have relations with any of your colonists or prisoners.</RimworldFavourites.Settings_AutoFavouriteQuestRewardPawns_ToolTip>
+
+	<RimworldFavourites.Settings_AutoFavouriteQuestRewardPawnsUnrelated>Include unrelated people and animals</RimworldFavourites.Settings_AutoFavouriteQuestRewardPawnsUnrelated>
+	<RimworldFavourites.Settings_AutoFavouriteQuestRewardPawnsUnrelated_ToolTip>Also auto favourite people and animals that aren't related to any of your colonists or prisoners.</RimworldFavourites.Settings_AutoFavouriteQuestRewardPawnsUnrelated_ToolTip>
+
+
 
 </LanguageData>

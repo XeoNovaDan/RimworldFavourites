@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI.Group;
-using HarmonyLib;
 
 namespace RimworldFavourites
 {
@@ -55,37 +53,70 @@ namespace RimworldFavourites
             public static void Postfix(ref Thing thing)
             {
                 // Auto favourite produced items that are Masterwork or higher quality
-                var qualityComp = thing.TryGetComp<CompQuality>();
-                if (qualityComp != null && qualityComp.Quality >= QualityCategory.Masterwork)
+                if (RimworldFavourites.settings.autoFavourite && RimworldFavourites.settings.autoFavouriteManufacturedThings)
                 {
-                    var favouriteComp = thing.TryGetComp<CompFavouritable>();
-                    if (favouriteComp != null)
-                        favouriteComp.Favourited = true;
+                    var qualityComp = thing.TryGetComp<CompQuality>();
+                    if (qualityComp != null && RimworldFavourites.settings.autoFavouriteManufacturedQualityRange.Includes(qualityComp.Quality))
+                    {
+                        var favouriteComp = thing.TryGetComp<CompFavouritable>();
+                        if (favouriteComp != null)
+                            favouriteComp.Favourited = true;
+                    }
                 }
             }
 
         }
 
-        [HarmonyPatch(typeof(QuestPart_DropPods))]
-        [HarmonyPatch(nameof(QuestPart_DropPods.Notify_QuestSignalReceived))]
-        public static class Patch_QuestPart_DropPods_Notify_QuestSignalReceived
+        [HarmonyPatch(typeof(Reward))]
+        [HarmonyPatch(nameof(Reward.Notify_Used))]
+        public static class Patch_Reward_Notify_Used
         {
 
-            public static void Postfix(QuestPart_DropPods __instance, List<Thing> ___tmpThingsToDrop)
+            public static void Postfix(Reward __instance)
             {
-                // Auto favourite quest reward items that are not a raw or manufactured resource
-                if (!___tmpThingsToDrop.NullOrEmpty())
+                var modSettings = RimworldFavourites.settings;
+                if (modSettings.autoFavourite && modSettings.autoFavouriteQuestRewards)
                 {
-                    for (int i = 0; i < ___tmpThingsToDrop.Count; i++)
+                    if (__instance is Reward_Items itemReward)
                     {
-                        var curThing = ___tmpThingsToDrop[i];
-                        if (curThing.TryGetComp<CompFavouritable>() is CompFavouritable favouriteComp && !curThing.HasThingCategory(ThingCategoryDefOf.ResourcesRaw) &&
-                            !curThing.HasThingCategory(ThingCategoryDefOf.Manufactured))
+                        var items = itemReward.items;
+                        for (int i = 0; i < items.Count; i++)
                         {
-                            favouriteComp.Favourited = true;
+                            var item = items[i];
+                            if (item.TryGetComp<CompFavouritable>() is CompFavouritable favouritable && (modSettings.autoFavouriteQuestRewardRawMaterials ||
+                                (!item.HasThingCategory(ThingCategoryDefOf.ResourcesRaw) && !item.HasThingCategory(ThingCategoryDefOf.Manufactured))))
+                                favouritable.Favourited = true;
                         }
                     }
+                    else if (__instance is Reward_Pawn pawnReward && modSettings.autoFavouriteQuestRewardPawns)
+                    {
+                        var pawn = pawnReward.pawn;
+
+                        bool favouritePawn = modSettings.autoFavouriteQuestRewardPawnsUnrelated;
+
+                        if (!favouritePawn && pawn.relations is Pawn_RelationsTracker relations)
+                        {
+                            var allPawnsList = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonistsAndPrisoners;
+
+                            var directRelations = relations.DirectRelations;
+
+                            for (int i = 0; i < directRelations.Count; i++)
+                            {
+                                var curRelation = directRelations[i];
+                                if (allPawnsList.Contains(curRelation.otherPawn))
+                                {
+                                    favouritePawn = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (favouritePawn && pawn.TryGetComp<CompFavouritable>() is CompFavouritable favouritable)
+                            favouritable.Favourited = true;
+
+                    }
                 }
+
             }
         }
 
