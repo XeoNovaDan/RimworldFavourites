@@ -30,15 +30,18 @@ namespace RimworldFavourites
                     if (favouriteComp != null && favouriteComp.Favourited)
                     {
                         // 24 - Same as BondIconWidth
-                        DrawFavouritedIcon(new Rect(curX - 24, (rect.height - 24) / 2, 24, 24));
+                        DrawFavouritedIcon(new Rect(curX - 24, (rect.height - 24) / 2, 24, 24), favouriteComp.StarColour);
                         curX -= 24; 
                     }
                 }
             }
 
-            public static void DrawFavouritedIcon(Rect rect)
+            public static void DrawFavouritedIcon(Rect rect, Color starColour)
             {
-                GUI.DrawTexture(rect, TexCommand.Favourited);
+                var prevColour = GUI.color;
+                GUI.color = starColour;
+                GUI.DrawTexture(rect, TexCommand.FavouriteStar);
+                GUI.color = prevColour;
                 if (Mouse.IsOver(rect))
                     TooltipHandler.TipRegion(rect, "RimworldFavourites.FavouritedIconDesc".Translate());
             }
