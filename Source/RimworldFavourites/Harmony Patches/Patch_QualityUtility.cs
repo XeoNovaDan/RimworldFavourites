@@ -17,14 +17,18 @@ namespace RimworldFavourites
             public static void Postfix(ref Thing thing)
             {
                 // Auto favourite produced items that are Masterwork or higher quality
-                if (RimworldFavourites.settings.autoFavourite && RimworldFavourites.settings.autoFavouriteManufacturedThings)
+                if (RimworldFavourites.settings.autoFavourite)
                 {
-                    var qualityComp = thing.TryGetComp<CompQuality>();
-                    if (qualityComp != null && RimworldFavourites.settings.autoFavouriteProdtctQualityRange.Includes(qualityComp.Quality))
+                    bool isBuilding = thing is Building;
+                    if ((isBuilding && RimworldFavourites.settings.autoFavouriteConstructedThings) || (!isBuilding && RimworldFavourites.settings.autoFavouriteManufacturedThings))
                     {
-                        var favouriteComp = thing.TryGetComp<CompFavouritable>();
-                        if (favouriteComp != null)
-                            favouriteComp.Favourited = true;
+                        var qualityComp = thing.TryGetComp<CompQuality>();
+                        if (qualityComp != null && RimworldFavourites.settings.autoFavouriteProductQualityRange.Includes(qualityComp.Quality))
+                        {
+                            var favouriteComp = thing.TryGetComp<CompFavouritable>();
+                            if (favouriteComp != null)
+                                favouriteComp.Favourited = true;
+                        }
                     }
                 }
             }
