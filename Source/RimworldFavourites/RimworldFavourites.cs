@@ -29,7 +29,7 @@ namespace RimworldFavourites
             #region Favourite Toggles
             // Auto favourite manufactured things + quality range
             drawSettings.CheckboxLabeled("RimworldFavourites.Settings_AutoFavouriteManufacturedThings".Translate(), ref settings.autoFavouriteManufacturedThings, "RimworldFavourites.Settings_AutoFavouriteManufacturedThings_ToolTip".Translate());
-            Widgets.QualityRange(drawSettings.GetRect(Widgets.RangeControlCompactHeight), 1342, ref settings.autoFavouriteManufacturedQualityRange);
+            Widgets.QualityRange(drawSettings.GetRect(Widgets.RangeControlCompactHeight), 1342, ref settings.autoFavouriteProdtctQualityRange);
             drawSettings.Gap();
 
             // Auto favourite quest rewards

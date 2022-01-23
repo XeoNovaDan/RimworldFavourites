@@ -21,7 +21,11 @@
 	<RimworldFavourites.Settings_AutoFavourite_ToolTip>Master toggle for auto favouriting.</RimworldFavourites.Settings_AutoFavourite_ToolTip>
 	
 	<RimworldFavourites.Settings_AutoFavouriteManufacturedThings>Manufactured things</RimworldFavourites.Settings_AutoFavouriteManufacturedThings>
-	<RimworldFavourites.Settings_AutoFavouriteManufacturedThings_ToolTip>Auto favourite things and buildings that are made by your colonists.</RimworldFavourites.Settings_AutoFavouriteManufacturedThings_ToolTip>
+	<RimworldFavourites.Settings_AutoFavouriteManufacturedThings_ToolTip>Auto favourite weapons, apparel etc that are made by your colonists.</RimworldFavourites.Settings_AutoFavouriteManufacturedThings_ToolTip>
+
+	<RimworldFavourites.Settings_AutoFavouriteConstructedThings>Constructed things</RimworldFavourites.Settings_AutoFavouriteConstructedThings>
+	<RimworldFavourites.Settings_AutoFavouriteConstructedThings_ToolTip>Auto favourite buildings that are made by your colonists.</RimworldFavourites.Settings_AutoFavouriteConstructedThings_ToolTip>
+
 
 	<RimworldFavourites.Settings_AutoFavouriteQuestRewards>Quest rewards</RimworldFavourites.Settings_AutoFavouriteQuestRewards>
 	<RimworldFavourites.Settings_AutoFavouriteQuestRewards_ToolTip>Auto favourite quest rewards.</RimworldFavourites.Settings_AutoFavouriteQuestRewards_ToolTip>

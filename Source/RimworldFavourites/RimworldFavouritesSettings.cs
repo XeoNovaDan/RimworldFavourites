@@ -12,7 +12,8 @@ namespace RimworldFavourites
 
         public bool autoFavourite = true;
         public bool autoFavouriteManufacturedThings = true;
-        public QualityRange autoFavouriteManufacturedQualityRange = new QualityRange(QualityCategory.Masterwork, QualityCategory.Legendary);
+        public bool autoFavouriteConstructedThings = true;
+        public QualityRange autoFavouriteProdtctQualityRange = new QualityRange(QualityCategory.Masterwork, QualityCategory.Legendary);
         public bool autoFavouriteQuestRewards = true;
         public bool autoFavouriteQuestRewardRawMaterials = false;
         public bool autoFavouriteQuestRewardPawns = true;
@@ -22,7 +23,8 @@ namespace RimworldFavourites
         {
             Scribe_Values.Look(ref autoFavourite, "autoFavourite", true);
             Scribe_Values.Look(ref autoFavouriteManufacturedThings, "autoFavouriteManufacturedThings", true);
-            Scribe_Values.Look(ref autoFavouriteManufacturedQualityRange, "autoFavouriteManufacturedQualityRange", new QualityRange(QualityCategory.Masterwork, QualityCategory.Legendary));
+            Scribe_Values.Look(ref autoFavouriteConstructedThings, "autoFavouriteConstructedThings", true);
+            Scribe_Values.Look(ref autoFavouriteProdtctQualityRange, "autoFavouriteManufacturedQualityRange", new QualityRange(QualityCategory.Masterwork, QualityCategory.Legendary));
             Scribe_Values.Look(ref autoFavouriteQuestRewards, "autoFavouriteQuestRewards", true);
             Scribe_Values.Look(ref autoFavouriteQuestRewardRawMaterials, "autoFavouriteQuestRewardRawMaterials", false);
             Scribe_Values.Look(ref autoFavouriteQuestRewardPawns, "autoFavouriteQuestRewardPawns", true);
