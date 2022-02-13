@@ -24,7 +24,7 @@ namespace RimworldFavourites
                 {
                     // Right click - Draw float menu with list of options to choose the colour of the favourited star
                     if (Event.current.button == 1)
-                        DrawColourSelectFloatMenu(StarColour, TexCommand.FavouriteStar);
+                        DrawColourSelectFloatMenu(TexCommand.FavouriteStar, true);
 
                     else
                         Favourited = !Favourited;
@@ -41,9 +41,9 @@ namespace RimworldFavourites
                 isActive = () => Junk,
                 toggleAction = () =>
                 {
-                    // Right click - Draw float menu with list of options to choose the colour of the favourited star
+                    // Right click - Draw float menu with list of options to choose the colour of the junk bin
                     if (Event.current.button == 1)
-                        DrawColourSelectFloatMenu(BinColour, TexCommand.JunkBin);
+                        DrawColourSelectFloatMenu(TexCommand.JunkBin, forJunk: true);
 
                     else
                         Junk = !Junk;
@@ -51,26 +51,36 @@ namespace RimworldFavourites
             };
         }
 
-        private void DrawColourSelectFloatMenu(Color colourToChange, Texture2D tex)
+        private void DrawColourSelectFloatMenu(Texture2D tex, bool forFavourite = false, bool forJunk = false)
         {
             var options = new List<FloatMenuOption>();
-            options.Add(new FloatMenuOption("RimworldFavourites.Yellow".Translate(), () => ChangeIconColour(ref colourToChange, Color.yellow), tex, Color.yellow));
-            options.Add(new FloatMenuOption("RimworldFavourites.Red".Translate(), () => ChangeIconColour(ref colourToChange, Color.red), tex, Color.red));
-            options.Add(new FloatMenuOption("RimworldFavourites.Green".Translate(), () => ChangeIconColour(ref colourToChange, Color.green), tex, Color.green));
-            options.Add(new FloatMenuOption("RimworldFavourites.Cyan".Translate(), () => ChangeIconColour(ref colourToChange, Color.cyan), tex, Color.cyan));
-            options.Add(new FloatMenuOption("RimworldFavourites.Magenta".Translate(), () => ChangeIconColour(ref colourToChange, Color.magenta), tex, Color.magenta));
+            options.Add(new FloatMenuOption("RimworldFavourites.Yellow".Translate(), () => ChangeIconColour(Color.yellow, forFavourite, forJunk), tex, Color.yellow));
+            options.Add(new FloatMenuOption("RimworldFavourites.Red".Translate(), () => ChangeIconColour(Color.red, forFavourite, forJunk), tex, Color.red));
+            options.Add(new FloatMenuOption("RimworldFavourites.Green".Translate(), () => ChangeIconColour(Color.green, forFavourite, forJunk), tex, Color.green));
+            options.Add(new FloatMenuOption("RimworldFavourites.Cyan".Translate(), () => ChangeIconColour(Color.cyan, forFavourite, forJunk), tex, Color.cyan));
+            options.Add(new FloatMenuOption("RimworldFavourites.Magenta".Translate(), () => ChangeIconColour(Color.magenta, forFavourite, forJunk), tex, Color.magenta));
             Find.WindowStack.Add(new FloatMenu(options));
         }
 
-        private static void ChangeIconColour(ref Color colourToChange, Color colour)
+        private void ChangeIconColour(Color colour, bool forFavourite = false, bool forJunk = false)
         {
+            if (forFavourite && forJunk)
+                throw new ArgumentException("forFavourite and forJunk cannot both be true");
+
             // Change the star/bin colour of all selected items, otherwise only a single colour gets changed
             var selectedItems = Find.Selector.SelectedObjectsListForReading;
             for (int i = 0; i < selectedItems.Count; i++)
             {
                 var thing = selectedItems[i] as Thing;
-                if (thing != null && thing.TryGetComp<CompFavouritable>() is CompFavouritable)
-                    colourToChange = colour;
+                if (thing != null && thing.TryGetComp<CompFavouritable>() is CompFavouritable favComp)
+                {
+                    if (forFavourite)
+                        favComp.StarColour = colour;
+                    else if (forJunk)
+                        favComp.BinColour = colour;
+                    else
+                        throw new NotImplementedException("Tried to change icon colour but not for favourite or junk");
+                }
             }
         }
 
@@ -243,7 +253,7 @@ namespace RimworldFavourites
             set
             {
                 binColour = value;
-                cachedJunkMat = null;
+                cachedMatToDraw = null;
             }
         }
 
@@ -272,7 +282,7 @@ namespace RimworldFavourites
                     {
                         if (BinColour == Color.yellow)
                             cachedMatToDraw = FavouriteOverlayDrawer.JunkMatYellow;
-                        if (BinColour == Color.red)
+                        else if (BinColour == Color.red)
                             cachedMatToDraw = FavouriteOverlayDrawer.JunkMatRed;
                         else if (BinColour == Color.green)
                             cachedMatToDraw = FavouriteOverlayDrawer.JunkMatGreen;
@@ -290,36 +300,12 @@ namespace RimworldFavourites
             }
         }
 
-        public Material JunkMaterial
-        {
-            get
-            {
-                if (cachedJunkMat == null)
-                {
-                    if (binColour == Color.yellow)
-                        cachedJunkMat = FavouriteOverlayDrawer.FavMatYellow;
-                    if (binColour == Color.red)
-                        cachedJunkMat = FavouriteOverlayDrawer.FavMatRed;
-                    else if (binColour == Color.green)
-                        cachedJunkMat = FavouriteOverlayDrawer.FavMatGreen;
-                    else if (binColour == Color.cyan)
-                        cachedJunkMat = FavouriteOverlayDrawer.FavMatCyan;
-                    else if (binColour == Color.magenta)
-                        cachedJunkMat = FavouriteOverlayDrawer.FavMatMagenta;
-                    else
-                        cachedJunkMat = FavouriteOverlayDrawer.FavMatRed;
-                }
-                return cachedJunkMat;
-            }
-        }
-
         private bool favourited;
         private bool junk;
         private Color starColour;
         private Color binColour;
         private FavouriteOverlayDrawer cachedFavouriteOverlayDrawer;
         private Material? cachedMatToDraw;
-        private Material? cachedJunkMat;
 
     }
 

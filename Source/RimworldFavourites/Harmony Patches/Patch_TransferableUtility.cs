@@ -18,8 +18,22 @@ namespace RimworldFavourites
             {
                 var favCompA = a.TryGetComp<CompFavouritable>();
                 var favCompB = b.TryGetComp<CompFavouritable>();
-                if (a != null && b != null && (favCompA.Favourited != favCompB.Favourited || favCompA.Junk != favCompB.Junk))
-                    __result = false;
+
+                // Separate items that have are or are not junk, or whose icon colours are different
+                if (a != null && b != null)
+                {
+                    bool compAFav = favCompA.Favourited;
+                    bool compBFav = favCompB.Favourited;
+                    bool compAJnk = favCompA.Junk;
+                    bool compBJnk = favCompB.Junk;
+
+                    if (compAFav != compBFav || compAJnk != compBJnk)
+                        __result = false;
+                    else if (compAFav && compBFav && favCompA.StarColour != favCompB.StarColour)
+                        __result = false;
+                    else if (compAJnk && compBJnk && favCompA.BinColour != favCompB.BinColour)
+                        __result = false;
+                }
             }
 
         }
