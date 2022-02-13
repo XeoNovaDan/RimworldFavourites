@@ -74,7 +74,7 @@ namespace RimworldFavourites
             drawPos.z -= 0.3f * rotSize.z;
             drawPos.x += 0.3f * rotSize.x;
             drawPos.y = BaseAlt + 0.16216215f;
-            drawBatch.DrawMesh(MeshPool.plane05, Matrix4x4.TRS(drawPos, Quaternion.identity, Vector3.one), p.Second.FavouritedMaterial, 0, true);
+            drawBatch.DrawMesh(MeshPool.plane05, Matrix4x4.TRS(drawPos, Quaternion.identity, Vector3.one), p.Second.MatToDraw, 0, true);
         }
 
         public void Register(Thing t, CompFavouritable c, bool checkRegister = true)
@@ -92,11 +92,18 @@ namespace RimworldFavourites
         }
 
         private static readonly float BaseAlt = AltitudeLayer.MetaOverlays.AltitudeFor();
+
         public static readonly Material FavMatYellow = MaterialPool.MatFrom("UI/Designators/FavouriteStar", ShaderDatabase.MetaOverlay, Color.yellow);
         public static readonly Material FavMatRed = MaterialPool.MatFrom("UI/Designators/FavouriteStar", ShaderDatabase.MetaOverlay, Color.red);
         public static readonly Material FavMatGreen = MaterialPool.MatFrom("UI/Designators/FavouriteStar", ShaderDatabase.MetaOverlay, Color.green);
         public static readonly Material FavMatCyan = MaterialPool.MatFrom("UI/Designators/FavouriteStar", ShaderDatabase.MetaOverlay, Color.cyan);
         public static readonly Material FavMatMagenta = MaterialPool.MatFrom("UI/Designators/FavouriteStar", ShaderDatabase.MetaOverlay, Color.magenta);
+
+        public static readonly Material JunkMatYellow = MaterialPool.MatFrom("UI/Designators/JunkBin", ShaderDatabase.MetaOverlay, Color.yellow);
+        public static readonly Material JunkMatRed = MaterialPool.MatFrom("UI/Designators/JunkBin", ShaderDatabase.MetaOverlay, Color.red);
+        public static readonly Material JunkMatGreen = MaterialPool.MatFrom("UI/Designators/JunkBin", ShaderDatabase.MetaOverlay, Color.green);
+        public static readonly Material JunkMatCyan = MaterialPool.MatFrom("UI/Designators/JunkBin", ShaderDatabase.MetaOverlay, Color.cyan);
+        public static readonly Material JunkMatMagenta = MaterialPool.MatFrom("UI/Designators/JunkBin", ShaderDatabase.MetaOverlay, Color.magenta);
 
         public DrawBatch drawBatch;
         public List<Pair<Thing, CompFavouritable>> overlaysToDraw;

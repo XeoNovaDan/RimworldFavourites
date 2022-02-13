@@ -14,11 +14,21 @@
 	<SpecialThingFilterDef>
 		<defName>RimworldFavourites_AllowUnfavourited</defName>
 		<label>allow unfavourited</label>
-		<description>Allow things that are not designated as favourites</description>
+		<description>Allow things that are not designated as favourites or junk</description>
 		<parentCategory>Root</parentCategory>
 		<allowedByDefault>true</allowedByDefault>
 		<saveKey>allowUnfavourited</saveKey>
 		<workerClass>RimworldFavourites.SpecialThingFilterWorker_Unfavourited</workerClass>
+	</SpecialThingFilterDef>
+	
+	<SpecialThingFilterDef>
+		<defName>RimworldFavourites_AllowJunk</defName>
+		<label>allow junk</label>
+		<description>Allow things that are designated as junk</description>
+		<parentCategory>Root</parentCategory>
+		<allowedByDefault>true</allowedByDefault>
+		<saveKey>allowJunk</saveKey>
+		<workerClass>RimworldFavourites.SpecialThingFilterWorker_Junk</workerClass>
 	</SpecialThingFilterDef>
 
 </Defs>

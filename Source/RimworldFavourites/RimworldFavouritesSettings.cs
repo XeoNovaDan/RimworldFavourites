@@ -9,7 +9,6 @@ namespace RimworldFavourites
 {
     public class RimworldFavouritesSettings : ModSettings
     {
-
         public bool autoFavourite = true;
         public bool autoFavouriteManufacturedThings = true;
         public bool autoFavouriteConstructedThings = true;

@@ -6,20 +6,20 @@ using Verse;
 
 namespace RimworldFavourites
 {
-    public class SpecialThingFilterWorker_Unfavourited : SpecialThingFilterWorker
+    public class SpecialThingFilterWorker_Junk : SpecialThingFilterWorker
     {
 
         public override bool Matches(Thing t)
         {
             var favouriteComp = t.TryGetComp<CompFavouritable>();
             if (favouriteComp != null)
-                return !favouriteComp.Favourited && !favouriteComp.Junk;
-            return true;
+                return favouriteComp.Junk;
+            return false;
         }
 
-        public override bool AlwaysMatches(ThingDef def)
+        public override bool CanEverMatch(ThingDef def)
         {
-            return !def.HasComp(typeof(CompFavouritable));
+            return def.HasComp(typeof(CompFavouritable));
         }
 
     }

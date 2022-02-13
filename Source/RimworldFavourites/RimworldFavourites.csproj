@@ -10,8 +10,8 @@
     <BaseIntermediateOutputPath />
     <DebugType>none</DebugType>
     <!-- <Configurations>Debug;Release</Configurations> -->
-    <FileVersion>1.3.1.3</FileVersion>
-    <AssemblyVersion>1.3.1.3</AssemblyVersion>
+    <FileVersion>1.4.1.3</FileVersion>
+    <AssemblyVersion>1.4.1.3</AssemblyVersion>
     <OutputType>Library</OutputType>
   </PropertyGroup>
 

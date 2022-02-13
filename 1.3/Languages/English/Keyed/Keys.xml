@@ -6,6 +6,11 @@
 	<RimworldFavourites.FavouritedIconDesc>This item has been marked as a favourite.</RimworldFavourites.FavouritedIconDesc> 
 	<RimworldFavourites.FavouritedShortUpper>FAV</RimworldFavourites.FavouritedShortUpper> 
 	
+	<RimworldFavourites.Junk>Junk</RimworldFavourites.Junk> 
+	<RimworldFavourites.JunkDesc>Mark this item as junk. It will be highlighted in trade menus, on the map view and in inventories.\n\nRight click to change the colour of the bin.</RimworldFavourites.JunkDesc> 
+	<RimworldFavourites.JunkIconDesc>This item has been marked as junk.</RimworldFavourites.JunkIconDesc> 
+	<RimworldFavourites.JunkShortUpper>JNK</RimworldFavourites.JunkShortUpper> 
+	
 	<RimworldFavourites.Yellow>Yellow</RimworldFavourites.Yellow> 
 	<RimworldFavourites.Red>Red</RimworldFavourites.Red> 
 	<RimworldFavourites.Green>Green</RimworldFavourites.Green> 
