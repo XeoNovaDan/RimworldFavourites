@@ -20,7 +20,7 @@ namespace RimworldFavourites
                 var favCompB = b.TryGetComp<CompFavouritable>();
 
                 // Separate items that have are or are not junk, or whose icon colours are different
-                if (a != null && b != null)
+                if (favCompA != null && favCompB != null)
                 {
                     bool compAFav = favCompA.Favourited;
                     bool compBFav = favCompB.Favourited;
